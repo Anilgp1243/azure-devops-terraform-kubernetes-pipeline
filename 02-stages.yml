@@ -19,7 +19,7 @@
           jobs:
           - job: DevDeploy
             steps:
-          -bash: echo Build FirstJob
+             - bash: echo Build FirstJob
         - stage: QADeploy
           dependsOn: Build
           jobs:
