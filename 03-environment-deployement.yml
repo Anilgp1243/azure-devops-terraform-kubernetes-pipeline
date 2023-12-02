@@ -16,7 +16,7 @@ stages:
   - job: DevDeployJob
     steps:
     - bash: echo "Start DevDeploy"
-  - deployment: DevDeployJob
+  - deployment: DevDeploy
     environment: Dev
     strategy:
       runOnce:
@@ -29,7 +29,7 @@ stages:
   - job: QaDeployJob
     steps:
     - bash: echo "Start QADeploy"
-  - deployment: QADeployJob
+  - deployment: QADeploy
     environment: QA
     strategy:
       runOnce:
