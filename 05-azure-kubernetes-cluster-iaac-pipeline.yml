@@ -13,17 +13,23 @@ steps:
   inputs:
     secureFile: 'azure_rsa.pub'
 
-- task: TerraformCLI@2
+- task: TerraformCLI@0
   inputs:
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure /kubernetes/'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure /kubernetes'
     commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
     backendType: 'azurerm'
-    backendAzureRmSubscriptionId: '62b26a67-c5fc-4f29-b878-6d8bd9117450'
+    backendServiceArm: 'azure-respurce-manager-service-connection'
     ensureBackend: true
     backendAzureRmResourceGroupName: 'terraform-backend-resourcegroup'
     backendAzureRmResourceGroupLocation: 'westeurope'
     backendAzureRmStorageAccountName: 'storageaccountanilgp'
     backendAzureRmContainerName: 'storageaccountanilgpcontainer'
     backendAzureRmKey: 'Kube-dev.tfstate'
-    allowTelemetryCollection: true
+
+- task: TerraformCLI@2
+  inputs:
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure /kubernetes'
+    environmentServiceName: 'azure-respurce-manager-service-connection'
+    commandOptions: '-var client_id=$(client id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
