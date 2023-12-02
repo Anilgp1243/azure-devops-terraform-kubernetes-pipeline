@@ -21,7 +21,7 @@ stages:
       displayName: Build an image
       inputs:
         containerRegistry: 'Docker'
-        repository: 'Anilgp1243'
+        repository: 'anilgp1234'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: '$(tag)'
