@@ -59,7 +59,8 @@ stages:
         connectionType: 'kubernetesServiceConnection'
         kubernetesServiceConnection: 'azure-kubernetes-connection'
         namespace: 'default'
-        manifests: '$(System.ArtifactsDirectory)/configuration/kubernetes/deployement.yaml'
+#        manifests: '$(System.ArtifactsDirectory)/configuration/kubernetes/deployement.yaml'
+        manifests: '$azure-devops-terraform-kubernetes-pipeline/configuration/kubernetes/deployement.yaml'
         containers: 'anilgp/anilgp1234/currency-exchange-devops:$(tag)'
 
 # After download artifacts task select deploy to kubernetes task 
