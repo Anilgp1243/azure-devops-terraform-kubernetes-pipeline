@@ -19,14 +19,14 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        containerRegistry: 'Docker'
-        repository: 'anilgp / anilgp1234'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
-        tags: '$(tag)'
+    # - task: Docker@2
+    #   displayName: Build an image
+    #   inputs:
+    #     containerRegistry: 'Docker'
+    #     repository: 'anilgp / anilgp1234'
+    #     command: 'buildAndPush'
+    #     Dockerfile: '**/Dockerfile'
+    #     tags: '$(tag)'
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)'
@@ -52,6 +52,15 @@ stages:
         artifactName: 'drop'
         itemPattern: '**/*.yaml'
         targetPath: '$(System.ArtifactsDirectory)'
+
+    - task: KubernetesManifest@1
+      inputs:
+        action: 'deploy'
+        connectionType: 'kubernetesServiceConnection'
+        kubernetesServiceConnection: 'azure-kubernetes-connection'
+        namespace: 'default'
+        manifests: '$(System.ArtifactsDirectory)/configuration/kubernetes/deployement.yaml'
+        containers: 'in28min/currency-exchange-devops:$(tag)'
 
 # After download artifacts task select deploy to kubernetes task 
 #select service connection name : namespace:default, starategy:None, Manifests:test
