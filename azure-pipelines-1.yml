@@ -60,7 +60,7 @@ stages:
         kubernetesServiceConnection: 'azure-kubernetes-connection'
         namespace: 'default'
         manifests: '$(System.ArtifactsDirectory)/configuration/kubernetes/deployement.yaml'
-        containers: 'in28min/currency-exchange-devops:$(tag)'
+        containers: 'anilgp/currency-exchange-devops:$(tag)'
 
 # After download artifacts task select deploy to kubernetes task 
 #select service connection name : namespace:default, starategy:None, Manifests:test
